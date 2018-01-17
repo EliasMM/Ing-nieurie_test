@@ -9,11 +9,13 @@ Interval.prototype.toString = function () {
 
 /**
  *
+ *
  * @param {Interval} interval
  * @returns {boolean}
  */
 Interval.prototype.overlaps = function (interval) {
     return this.end > interval.start && this.start < interval.end;
+    //test
 };
 
 
