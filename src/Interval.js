@@ -9,6 +9,7 @@ Interval.prototype.toString = function () {
 
 /**
  *
+ *
  * @param {Interval} interval
  * @returns {boolean}
  */
