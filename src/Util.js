@@ -6,8 +6,13 @@ Util = {};
  * @returns {number}
  */
 Util.factorial = function(n) {
+	if (!(typeof n === "number") || Math.floor(n) !== n)  throw 'Unable to compute factorial of non integer values'
+    
+    if (n < 0) throw 'Unable to compute factorial for n < 0'
+    
 	if (n===0) return 1;
-	return Util.factorial(n-1);
+
+	return n*Util.factorial(n-1);
 };
 
 /**
@@ -18,7 +23,11 @@ Util.factorial = function(n) {
  * @returns {number}
  */
 Util.arrangement = function(n, r) {
+	if (r>n) throw 'Unable to compute arrangement for (n-r) < 0'
+		
+	if (!(typeof r === "number") || Math.floor(r) !== r) throw 'Unable to compute arrangement of non integer values'
 
+ 	return Util.factorial(n)/Util.factorial(n-r)
 };
 
 /**
@@ -30,18 +39,30 @@ Util.arrangement = function(n, r) {
  */
 Util.combination = function(n, r) {
 
+	return Util.arrangement(n,r) / Util.factorial(r)
 };
 
 /**
  * Détermine si n est un nombre premier.
- * Util.isPrime(5) => false
- * Util.isPrime(6) => true
+ * Util.isPrime(5) => true
+ * Util.isPrime(6) => false
  *
  * @param {number} n
  * @returns {boolean}
  */
 Util.isPrime = function(n) {
+	if (!(typeof n === "number") || Math.floor(n) !== n) throw 'Unable to compute isPrime of non integer values'
+    
+    if (n <= 0) throw 'Unable to compute isPrime for n <= 0'
 
+    if (n===1) return false
+
+    if (n === 2 || n === 3) return true
+ 
+     for(var i = 2 ; i < n ; i++)
+        if( n % i === 0 ) return false
+
+     return true
 };
 
 
@@ -55,7 +76,20 @@ Util.isPrime = function(n) {
  * @returns {number}
  */
 Util.sumPrime = function(n) {
+	if (!(typeof n === "number") || Math.floor(n) !== n) {
+        throw 'Unable to compute sumPrime of non integer values'
+    }
+      if (n < 2) {
+        throw 'Unable to compute sumPrime for n < 2'
+    }
+    var cpt = 0;
 
+    for(var i = 2 ; i <= n ; i++){
+        if(Util.isPrime(i) === true){
+            cpt = cpt + i;
+        }
+     }
+    return cpt;
 };
 
 /**
@@ -71,7 +105,23 @@ Util.sumPrime = function(n) {
  * @returns {array}
  */
 Util.fizzBuzz = function(n) {
+	if(typeof n !== "number" || Math.floor(n) !== n ) throw 'Unable to compute fizzBuzz of non integer values'
+    if(n < 1) throw 'Unable to compute fizzBuzz for n < 1'
 
+    var arrayResult = []
+
+    for( var i = 1 ; i <= n ; i++ ){
+
+        if(i%3 === 0 && i%5 === 0) arrayResult.push("FizzBuzz")
+
+        else if(i%3 === 0) arrayResult.push("Fizz")
+
+        else if(i%5 === 0) arrayResult.push("Buzz")
+
+        else arrayResult.push(i)
+    }
+
+    return arrayResult
 };
 
 /**
@@ -85,4 +135,19 @@ Util.fizzBuzz = function(n) {
  */
 Util.cipher = function (phrase) {
 
+    var cipheredString = ""
+
+    if(typeof phrase !== "string") throw 'Unable to compute cipher of non string value'
+
+    for(var i = 0 ; i < phrase.length ; i++){
+        if(phrase[i] === "Z") cipheredString += "A"
+
+        else if(phrase[i] === "z") cipheredString += "a";
+
+        else if(phrase[i] === " ") cipheredString += " "
+
+        else cipheredString += String.fromCharCode(phrase[i].charCodeAt(0)+1);
+    }
+
+    return cipheredString;
 };
