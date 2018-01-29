@@ -15,7 +15,6 @@ Interval.prototype.toString = function () {
  */
 Interval.prototype.overlaps = function (interval) {
     return this.end > interval.start && this.start < interval.end;
-    //test
 };
 
 
