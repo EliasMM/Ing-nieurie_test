@@ -279,14 +279,14 @@ describe("Cipher", function(){
     }];
 
     testCases.forEach(function(testCase){
-        it("should returns " + testCase.original + " when n = " + testCase.ciphered, function(){
-            var cipher = Util.cipher(testCase.original);
-            expect(cipher).toEqual(testCase.ciphered);
+        it("should return " + testCase.ciphered + " when phrase = " + testCase.original, function(){
+            var ciphered = Util.cipher(testCase.original);
+            expect(ciphered).toEqual(testCase.ciphered);
         });
 
     });
 
-    it("should return exception when n is not a string",function(){
+    it("should return an exception when phrase is not a string",function(){
         var f = function(){
             Util.cipher(3);
         }
