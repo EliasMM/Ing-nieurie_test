@@ -24,3 +24,31 @@ describe("Interval - overlapping", function () {
         });
     });
 });
+
+describe("Interval - includes", function () {
+    testedInterval = new Interval(10, 20);
+
+    [
+        new Interval(10, 20),
+        new Interval(10, 16),
+        new Interval(12, 20),
+        new Interval(10, 10),
+        new Interval(20, 20)
+
+    ].forEach(function (interval) {
+        it("should include " + interval.toString() + " in " + testedInterval.toString(), function () {
+            expect(testedInterval.includes(interval)).toBeTruthy();
+        });
+    });
+
+    [
+        new Interval(9, 21),
+        new Interval(9, 11),
+        new Interval(10,21),
+
+    ].forEach(function (interval) {
+        it("should not include " + interval.toString() + " in " + testedInterval.toString(), function () {
+            expect(testedInterval.includes(interval)).toBeFalsy();
+        });
+    });
+});
