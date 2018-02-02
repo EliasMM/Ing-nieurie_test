@@ -52,3 +52,31 @@ describe("Interval - includes", function () {
         });
     });
 });
+
+describe("Interval - union", function () {
+    testedInterval = new Interval(10, 20);
+
+    [
+        {
+           interv : new Interval(8, 12),
+           value : new Interval(8,20) 
+        },
+        {
+           interv : new Interval(15, 16),
+           value : new Interval(10,20) 
+        },
+        {
+           interv : new Interval(15, 25),
+           value : new Interval(10,25) 
+        }
+
+    ].forEach(function (interval) {
+        it("should return " + interval.value.toString() + "  when " + testedInterval.toString() +"U"+interval.interv.toString(), function () {
+            expect(testedInterval.union(interval.interv)).toEqual(interval.value);
+        });
+    });
+    faultyOverlappingInterval = new Interval(8, 9);
+    it("should return " + faultyOverlappingInterval.toString() + " and " + testedInterval.toString()+" when "+faultyOverlappingInterval.toString()+"U"+testedInterval.toString(), function () {
+            expect(testedInterval.union(faultyOverlappingInterval)).toEqual([testedInterval,faultyOverlappingInterval]);
+     });
+});
