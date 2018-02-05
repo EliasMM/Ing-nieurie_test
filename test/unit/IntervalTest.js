@@ -1,5 +1,5 @@
 describe("Interval - overlapping", function () {
-    testedInterval = new Interval(10, 20);
+    var testedInterval = new Interval(10, 20);
 
     [
         new Interval(8, 12),
@@ -26,14 +26,14 @@ describe("Interval - overlapping", function () {
 });
 
 describe("Interval - includes", function () {
-    testedInterval = new Interval(10, 20);
+    var testedInterval = new Interval(10,20);
 
     [
-        new Interval(10, 20),
-        new Interval(10, 16),
-        new Interval(12, 20),
-        new Interval(10, 10),
-        new Interval(20, 20)
+        new Interval(10,20),
+        new Interval(10,16),
+        new Interval(12,20),
+        new Interval(10,10),
+        new Interval(20,20)
 
     ].forEach(function (interval) {
         it("should include " + interval.toString() + " in " + testedInterval.toString(), function () {
@@ -42,8 +42,8 @@ describe("Interval - includes", function () {
     });
 
     [
-        new Interval(9, 21),
-        new Interval(9, 11),
+        new Interval(9,21),
+        new Interval(9,11),
         new Interval(10,21),
 
     ].forEach(function (interval) {
@@ -54,19 +54,19 @@ describe("Interval - includes", function () {
 });
 
 describe("Interval - union", function () {
-    testedInterval = new Interval(10, 20);
+    var testedInterval = new Interval(10,20);
 
     [
         {
-           interv : new Interval(8, 12),
+           interv : new Interval(8,12),
            value : new Interval(8,20) 
         },
         {
-           interv : new Interval(15, 16),
+           interv : new Interval(15,16),
            value : new Interval(10,20) 
         },
         {
-           interv : new Interval(15, 25),
+           interv : new Interval(15,25),
            value : new Interval(10,25) 
         }
 
@@ -75,26 +75,26 @@ describe("Interval - union", function () {
             expect(testedInterval.union(interval.interv)).toEqual(interval.value);
         });
     });
-    faultyOverlappingInterval = new Interval(8, 9);
+    faultyOverlappingInterval = new Interval(8,9);
     it("should return " + faultyOverlappingInterval.toString() + " and " + testedInterval.toString()+" when "+faultyOverlappingInterval.toString()+"U"+testedInterval.toString(), function () {
             expect(testedInterval.union(faultyOverlappingInterval)).toEqual([testedInterval,faultyOverlappingInterval]);
      });
 });
 
 describe("Interval - intersection", function () {
-    testedInterval = new Interval(10, 20);
+    var testedInterval = new Interval(10,20);
 
     [
         {
-           interv : new Interval(8, 12),
+           interv : new Interval(8,12),
            value : new Interval(10,12) 
         },
         {
-           interv : new Interval(15, 16),
+           interv : new Interval(15,16),
            value : new Interval(15,16) 
         },
         {
-           interv : new Interval(15, 25),
+           interv : new Interval(15,25),
            value : new Interval(15,20) 
         }
 
@@ -103,7 +103,7 @@ describe("Interval - intersection", function () {
             expect(testedInterval.intersection(interval.interv)).toEqual(interval.value);
         });
     });
-    faultyOverlappingInterval = new Interval(8, 9);
+    faultyOverlappingInterval = new Interval(8,9);
     it("should return null when "+faultyOverlappingInterval.toString()+"∩"+testedInterval.toString(), function () {
             expect(testedInterval.intersection(faultyOverlappingInterval)).toEqual(null);
      });
